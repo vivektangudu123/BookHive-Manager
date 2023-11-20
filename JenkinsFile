@@ -7,6 +7,7 @@ pipeline{
     stages{
         stage('Clone Git'){
             steps{
+                git branch: 'main',
                 git 'https://github.com/vivektangudu123/udem.git'
             }
         }
