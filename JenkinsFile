@@ -15,7 +15,8 @@ pipeline{
             steps{
                 dir('client'){
                     sh "npm install"
-                    sh 'docker build -t frontend-image'
+                    sh "pwd"
+                    sh 'docker build -t frontend-image .'
                 }
             }
         }
