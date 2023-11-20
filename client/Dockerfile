@@ -1,11 +1,7 @@
 FROM node:21
 
 # Create app directory
-WORKDIR /app
-
-# Install app dependencies
-COPY ./package.json /app
-COPY ./package-lock.json /app
+WORKDIR /client
 
 RUN npm ci
 # If you are building your code for production
