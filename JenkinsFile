@@ -20,12 +20,12 @@ pipeline{
         }
         stage('Build Frontend Image') {
             steps {
-                sh 'docker build -t frontend-image ./client'
+                sh 'docker build -t frontend-image .'
             }
         }
          stage('Build Backend Image') {
             steps {
-                sh 'docker build -t backend-image .'
+                sh 'docker build -t backend-image ./client'
             }
         }
     }
