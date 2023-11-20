@@ -22,7 +22,6 @@ pipeline{
         }
         stage("Backend"){
             steps{
-                sh "../"
                 sh "pwd"
             }
         }
