@@ -12,7 +12,7 @@ pipeline{
         }
         stage('Testing'){
             steps{
-                dir('api'){
+                dir('client'){
                     sh "npm install"
                     sh "npm test"
                 }
