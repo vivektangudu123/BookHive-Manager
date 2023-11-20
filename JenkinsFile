@@ -5,13 +5,11 @@ pipeline{
         JWT_SECRET = "SECRETLEL"
     }
     stages{
-        stage('Clone Git'){
         stage('Stage 1: Git Clone'){
            steps{
                 git branch: 'main',
                 url:'https://github.com/vivektangudu123/udem.git'
             }
-        }
         }
         stage('Testing'){
             steps{
