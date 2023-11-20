@@ -21,7 +21,7 @@ pipeline{
                 sh 'docker build -t frontend-image .'
             }
         }
-         stage('Build Backend Image') {
+        stage('Build Backend Image') {
             steps {
                 sh 'docker build -t backend-image ./api'
             }
