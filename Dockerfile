@@ -15,4 +15,3 @@ RUN nodemon server/server
 COPY . /backend
 
 EXPOSE 5002
-CMD [ "npm", "start" ]
