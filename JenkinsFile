@@ -25,7 +25,7 @@ pipeline{
         }
          stage('Build Backend Image') {
             steps {
-                sh 'docker build -t backend_image'
+                sh 'docker build -t backend-image'
             }
         }
     }
