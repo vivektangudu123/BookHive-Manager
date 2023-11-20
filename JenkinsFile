@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('Clone Git'){
             steps{
-                git 'https://github.com/bansalc73/bookMyBuddy'
+                git 'https://github.com/vivektangudu123/udem.git'
             }
         }
         stage('Testing'){
