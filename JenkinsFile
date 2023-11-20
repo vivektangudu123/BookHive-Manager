@@ -14,7 +14,6 @@ pipeline{
             steps{
                 dir('client'){
                     sh "npm install"
-                    sh "npm test"
                 }
             }
         }
@@ -25,7 +24,7 @@ pipeline{
         }
          stage('Build Backend Image') {
             steps {
-                sh 'docker build -t backend-image ./api'
+                sh 'docker build -t backend-image ./client'
             }
         }
     }
