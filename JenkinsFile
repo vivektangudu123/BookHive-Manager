@@ -3,6 +3,7 @@ pipeline{
     environment{
         MONGO_URL = "mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/"
         JWT_SECRET = "SECRETLEL"
+    }
     stages{
         stage('Clone Git'){
             steps{
@@ -11,8 +12,9 @@ pipeline{
         }
         stage('Testing'){
             steps{
-                dir('client'){
+                dir('api'){
                     sh "npm install"
+                    sh "npm test"
                 }
             }
         }
@@ -21,10 +23,10 @@ pipeline{
                 sh 'docker build -t frontend-image .'
             }
         }
-        stage('Build Backend Image') {
+         stage('Build Backend Image') {
             steps {
                 sh 'docker build -t backend-image ./api'
             }
         }
     }
-}}
+}
