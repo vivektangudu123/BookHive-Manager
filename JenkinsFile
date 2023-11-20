@@ -15,18 +15,8 @@ pipeline{
             steps{
                 dir('client'){
                     sh "npm install"
+                    sh 'docker build -t frontend-image'
                 }
-            }
-        }
-        stage('Build Frontend Image') {
-            steps {
-                sh 'pwd'
-                sh 'docker build -t frontend-image ./client'
-            }
-        }
-         stage('Build Backend Image') {
-            steps {
-                sh 'docker build -t backend-image ./client'
             }
         }
     }
