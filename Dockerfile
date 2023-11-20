@@ -34,4 +34,4 @@ COPY . /backend
 EXPOSE 5002
 
 # Run nodemon to start your server
-CMD ["nodemon", "server/server"]
+CMD ["nodemon", "backend/server/server"]
