@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false)
-mongoose.connect(process.env.mongo_url)
+mongoose.connect("mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/")
 
 const connection = mongoose.connection;
 
