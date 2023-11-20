@@ -14,5 +14,5 @@ RUN nodemon server/server
 # Bundle app source
 COPY . /backend
 
-EXPOSE 5007
+EXPOSE 5002
 CMD [ "npm", "start" ]
