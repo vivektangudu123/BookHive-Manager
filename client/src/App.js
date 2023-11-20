@@ -16,6 +16,7 @@ import BookDescription from "./pages/BookDescription";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
+
   return (
     <div>
       {loading && <Loader />}

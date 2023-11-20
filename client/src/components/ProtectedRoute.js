@@ -18,6 +18,7 @@ function ProtectedRoute({ children }) {
       dispatch(HideLoading());
       if (response.success) {
         dispatch(SetUser(response.data));
+
       } else {
         localStorage.removeItem("token");
         navigate("/login");
