@@ -4,8 +4,8 @@ FROM nodemon:3
 WORKDIR /app
 
 # Install app dependencies
-COPY ./package.json /app
-COPY ./package-lock.json /app
+COPY ./package.json /server
+COPY ./package-lock.json /server
 
 RUN nodemon server/server
 # If you are building your code for production
