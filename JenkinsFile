@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         MONGO_URL = "mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/"
-        JWT_SECRET = SECRETLEL
+        JWT_SECRET = "SECRETLEL"
     stages{
         stage('Clone Git'){
             steps{
