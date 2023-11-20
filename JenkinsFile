@@ -6,10 +6,12 @@ pipeline{
     }
     stages{
         stage('Clone Git'){
-            steps{
+        stage('Stage 1: Git Clone'){
+           steps{
                 git branch: 'main',
-                git 'https://github.com/vivektangudu123/udem.git'
+                url:'https://github.com/vivektangudu123/udem.git'
             }
+        }
         }
         stage('Testing'){
             steps{
