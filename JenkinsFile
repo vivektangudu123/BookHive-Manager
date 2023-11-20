@@ -17,5 +17,10 @@ pipeline{
                 }
             }
         }
+        stage('Build Frontend Image') {
+            steps {
+                sh 'docker build -t frontend-image .'
+            }
+        }
     }
 }
