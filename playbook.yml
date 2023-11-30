@@ -1,0 +1,15 @@
+---
+- name: Deploy MERN Application
+  hosts: all
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: Copy Docker Compose file
+      copy:
+        src: docker-compose.yml
+        dest: "docker-compose.yml"
+
+    - name: Run Docker Compose
+      command: docker-compose up -d
