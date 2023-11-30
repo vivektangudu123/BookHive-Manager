@@ -8,20 +8,23 @@ pipeline {
         stage('Stage 1: Git Clone') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/vivektangudu123/client.git'
+                url: 'https://github.com/vivektangudu123/lib.git'
             }
         }
         stage('Testing') {
             steps {
+                dir('client'){
                 sh "npm install"
                 sh 'docker build -t frontend-image .'
+            }
             }
         }
         stage("Git clone 2") {
             steps {
+                dir('server'){
                 git branch: 'main',
                 url: 'https://github.com/vivektangudu123/server.git'
-            }
+            }}
         }
         stage('Testing_2') {
             steps {
