@@ -28,7 +28,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mern-backend-secret
-              key: MONGO
+              key: mongo_url 
         - name: JWT
           valueFrom:
             secretKeyRef:
