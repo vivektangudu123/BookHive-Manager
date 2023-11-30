@@ -33,5 +33,5 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mern-backend-secret
-              key: JWT
+              key: jwt_secret
 
