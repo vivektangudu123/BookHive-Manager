@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-configmap
+  namespace: mern-app
+data:
+  REACT_APP_BASE_URL: backend-service

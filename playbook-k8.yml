@@ -1,0 +1,48 @@
+---
+- name: Deploying with Kubernetes
+  hosts: all
+  tasks:
+
+    - name: install pre-requisites
+      pip:
+        name:
+          - openshift
+          - pyyaml
+          - kubernetes 
+
+    - name: Apply Secrets
+      kubernetes.core.k8s:
+        state: present
+        definition: "/k8/mern-backend-secret.yaml"
+
+    - name: Create Frontend Deployment
+      kubernetes.core.k8s:
+        state: present
+        definition: "/k8/frontend-deployment.yaml" 
+
+    - name: Create Frontend Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "/k8/frontend-service.yaml" 
+
+
+    - name: Create Backend Deployment
+      kubernetes.core.k8s:
+        state: present
+        definition: "./k8/backend-deployment.yaml"
+
+    - name: Create Backend Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "/k8/backend-service.yaml"
+
+
+    - name: Create Config Map
+      kubernetes.core.k8s:
+        state: present
+        definition: "/k8/frontend-configmap.yaml" 
+
+    - name: Create Ingress
+      kubernetes.core.k8s:
+        state: present
+        definition: "/k8/mern-ingress.yaml" 
