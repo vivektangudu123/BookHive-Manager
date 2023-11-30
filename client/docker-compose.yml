@@ -1,0 +1,22 @@
+version: '3'
+services:
+  container1:
+    image: frontend-image
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+    depends_on:
+      - container2
+
+  container2:
+    image: backend-image
+    ports:
+      - "5003:5003"
+    networks:
+      - mynetwork
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  mynetwork:

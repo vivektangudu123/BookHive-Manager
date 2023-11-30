@@ -3,7 +3,9 @@ import { axiosInstance } from "./axiosInstance";
 // register a user
 export const RegisterUser = async (payload) => {
   try {
+    console.log(payload)
     const response = await axiosInstance.post("/api/users/register", payload);
+    console.log(response)
     return response.data;
   } catch (error) {
     throw error;
@@ -13,7 +15,9 @@ export const RegisterUser = async (payload) => {
 // login a user
 export const LoginUser = async (payload) => {
   try {
+    console.log(payload)
     const response = await axiosInstance.post("/api/users/login", payload);
+    console.log(response)
     return response.data;
   } catch (error) {
     throw error;

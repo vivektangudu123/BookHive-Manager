@@ -1,29 +1,44 @@
-pipeline{
+pipeline {
     agent any
-    environment{
+    environment {
         mongo_url = "mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/"
         JWT_SECRET = "SECRETLEL"
     }
-    stages{
-        stage('Stage 1: Git Clone'){
-           steps{
+    stages {
+        stage('Stage 1: Git Clone') {
+            steps {
                 git branch: 'main',
-                url:'https://github.com/vivektangudu123/udem.git'
+                url: 'https://github.com/vivektangudu123/client.git'
             }
         }
-        stage('Testing'){
-            steps{
-                dir('client'){
-                    sh "npm install"
-                    sh "pwd"
-                    sh 'docker build -t frontend-image .'
-                }
+        stage('Testing') {
+            steps {
+                sh "npm install"
+                sh 'docker build -t frontend-image .'
             }
         }
-        stage("Backend"){
-            steps{
-                sh "pwd"
+        stage("Git clone 2") {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/vivektangudu123/server.git'
+            }
+        }
+        stage('Testing_2') {
+            steps {
+                sh "npm install"
                 sh 'docker build -t backend-image .'
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                        sh "docker login --username bean6792 --password Vivek@1383"
+                        sh 'docker tag frontend-image bean6792/frontend-image:latest'
+                        sh 'docker push bean6792/frontend-image:latest'
+                        sh "docker tag backend-image bean6792/backend-image:latest"
+                        sh "docker push bean6792/backend-image:latest"
+                    
+                }
             }
         }
     }
