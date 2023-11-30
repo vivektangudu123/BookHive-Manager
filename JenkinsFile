@@ -11,7 +11,7 @@ pipeline {
                 url: 'https://github.com/vivektangudu123/lib.git'
             }
         }
-        stage('Testing') {
+        stage('client build') {
             steps {
                 dir('client'){
                 sh "npm install"
@@ -19,18 +19,12 @@ pipeline {
             }
             }
         }
-        stage("Git clone 2") {
+        stage("Server build") {
             steps {
                 dir('server'){
-                git branch: 'main',
-                url: 'https://github.com/vivektangudu123/server.git'
-            }}
-        }
-        stage('Testing_2') {
-            steps {
                 sh "npm install"
                 sh 'docker build -t backend-image .'
-            }
+            }}
         }
         stage('Push to Docker Hub') {
             steps {
