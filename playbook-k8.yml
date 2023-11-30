@@ -2,7 +2,6 @@
 - name: Deploying with Kubernetes
   hosts: all
   tasks:
-
     - name: install pre-requisites
       pip:
         name:
@@ -13,36 +12,34 @@
     - name: Apply Secrets
       kubernetes.core.k8s:
         state: present
-        definition: "k8/mern-backend-secret.yaml"
+        definition: "{{ lookup('file', 'k8/mern-backend-secret.yaml') | from_yaml }}"
 
     - name: Create Frontend Deployment
       kubernetes.core.k8s:
         state: present
-        definition: "k8/frontend-deployment.yaml" 
+        definition: "{{ lookup('file', 'k8/frontend-deployment.yaml') | from_yaml }}"
 
     - name: Create Frontend Service
       kubernetes.core.k8s:
         state: present
-        definition: "k8/frontend-service.yaml" 
-
+        definition: "{{ lookup('file', 'k8/frontend-service.yaml') | from_yaml }}"
 
     - name: Create Backend Deployment
       kubernetes.core.k8s:
         state: present
-        definition: "k8/backend-deployment.yaml"
+        definition: "{{ lookup('file', 'k8/backend-deployment.yaml') | from_yaml }}"
 
     - name: Create Backend Service
       kubernetes.core.k8s:
         state: present
-        definition: "k8/backend-service.yaml"
-
+        definition: "{{ lookup('file', 'k8/backend-service.yaml') | from_yaml }}"
 
     - name: Create Config Map
       kubernetes.core.k8s:
         state: present
-        definition: "k8/frontend-configmap.yaml" 
+        definition: "{{ lookup('file', 'k8/frontend-configmap.yaml') | from_yaml }}"
 
     - name: Create Ingress
       kubernetes.core.k8s:
         state: present
-        definition: "k8/mern-ingress.yaml" 
+        definition: "{{ lookup('file', 'k8/mern-ingress.yaml') | from_yaml }}"
