@@ -38,7 +38,7 @@ export const GetLoggedInUserDetails = async () => {
 // get all users
 export const GetAllUsers = async (role) => {
   try {
-    const response = await axiosInstance.get(`/api/users/get-all-users/${role}`);
+    const response = await axiosInstance.get(baseUrl + `/api/users/get-all-users/${role}`);
     return response.data;
   } catch (error) {
     throw error;
@@ -50,7 +50,7 @@ export const GetAllUsers = async (role) => {
 
 export const GetUserById = async (id) => {
   try {
-    const response = await axiosInstance.get(`/api/users/get-user-by-id/${id}`);
+    const response = await axiosInstance.get(baseUrl + `/api/users/get-user-by-id/${id}`);
     return response.data;
   } catch (error) {
     throw error;
