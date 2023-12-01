@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 app.use(express.json());
 require("dotenv").config();
@@ -9,6 +10,13 @@ const usersRoute = require("./routes/usersRoute");
 const booksRoute = require("./routes/booksRoute");
 const issuesRoute = require("./routes/issuesRoute");
 const reportsRoute = require("./routes/reportsRoute");
+
+// Place cors middleware before your routes
+app.use(cors({
+  origin: '*',
+  methods: ['POST', 'GET', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use("/api/users", usersRoute);
 app.use("/api/books", booksRoute);
@@ -28,9 +36,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use(cors({
-  origin: '*',
-  methods: ['POST', 'GET', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
 app.listen(port, () => console.log(`Node server started at ${port}`));
