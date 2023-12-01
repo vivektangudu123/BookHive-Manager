@@ -11,6 +11,12 @@ const booksRoute = require("./routes/booksRoute");
 const issuesRoute = require("./routes/issuesRoute");
 const reportsRoute = require("./routes/reportsRoute");
 
+app.use(cors({
+  origin: '*',
+  methods: ['POST', 'GET', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use("/api/users", usersRoute);
 app.use("/api/books", booksRoute);
 app.use("/api/issues", issuesRoute);
@@ -29,9 +35,5 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use(cors({
-  origin: '*',
-  methods: ['POST', 'GET', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+
 app.listen(port, () => console.log(`Node server started at ${port}`));
