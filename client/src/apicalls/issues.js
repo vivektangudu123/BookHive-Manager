@@ -1,6 +1,7 @@
 import { axiosInstance } from "./axiosInstance";
 
 // issue a book
+const baseUrl = process.env.REACT_APP_BASE_URL;
 export const IssueBook = async (payload) => {
   try {
     const response = await axiosInstance.post(baseUrl + "/api/issues/issue-new-book", payload);
