@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false)
 console.log(process.env.jwt_secret)
-mongoose.connect("mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/")
+mongoose.connect("mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/check")
 
 const connection = mongoose.connection;
 
-connection.on('connected' , ()=>{
+connection.on('connected', () => {
     console.log('Mongo DB Connection Successfull');
 })
 
-connection.on('error' , (err)=>{
+connection.on('error', (err) => {
     console.log('Mongo DB Connection Failed');
 })
 

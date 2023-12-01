@@ -42,5 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://container2:5002"
+  "proxy": "https://back-j9al.onrender.com"
 }
