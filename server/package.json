@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "bcryptjs": "^2.4.3",
     "caniuse-lite": "^1.0.30001563",
     "dotenv": "^16.0.3",
