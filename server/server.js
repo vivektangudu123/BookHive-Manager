@@ -28,4 +28,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.use(cors({
+  origin: '*',
+  methods: ['POST', 'GET', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.listen(port, () => console.log(`Node server started at ${port}`));
