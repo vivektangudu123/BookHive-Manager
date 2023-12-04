@@ -17,6 +17,12 @@ services:
       - mynetwork
     extra_hosts:
       - "host.docker.internal:host-gateway"
-
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: your_username
+      MONGO_INITDB_ROOT_PASSWORD: your_password
 networks:
   mynetwork:

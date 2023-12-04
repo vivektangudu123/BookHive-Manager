@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false)
 console.log(process.env.jwt_secret)
-mongoose.connect("mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/check")
+const mongoContainerName = 'mongo-container';
+//mongoose.connect("mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/check")
+const mongoUrl = `mongodb://${mongoContainerName}:27017/check`;
+mongoose.connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
 const connection = mongoose.connection;
 
