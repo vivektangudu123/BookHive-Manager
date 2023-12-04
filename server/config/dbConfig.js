@@ -5,10 +5,6 @@ console.log(process.env.jwt_secret)
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    auth: {
-        username: process.env.MONGO_USERNAME, // Replace with your actual username
-        password: process.env.MONGO_PASSWORD, // Replace with your actual password
-    }
 });
 
 
