@@ -19,8 +19,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      - MONGO_URL:mongodb://your_username:your_password@mongodb:27017/?authMechanism=DEFAULT
-      - jwt_secret:secret
+      - MONGO_URL: mongodb://your_username:your_password@mongodb:27017/?authMechanism=DEFAULT
+      - jwt_secret: secret
   mongodb:
     image: mongo:latest
     ports:
