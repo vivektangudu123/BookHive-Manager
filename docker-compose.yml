@@ -9,7 +9,7 @@ services:
     depends_on:
       - container2
     environment:
-      - REACT_APP_BASE_URL=https://container2:5003
+      - REACT_APP_BASE_URL: https://container2:5003
   container2:
     image: backend-image
     ports:
@@ -19,7 +19,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      - MONGO_URL: "mongodb://your_username:your_password@mongodb:27017/?authMechanism=DEFAULT"
+      - MONGO_URL: mongodb://your_username:your_password@mongodb:27017/?authMechanism=DEFAULT
       - jwt_secret: secret
   mongodb:
     image: mongo:latest
