@@ -8,7 +8,8 @@ services:
       - mynetwork
     depends_on:
       - container2
-
+    environment:
+      - REACT_APP_BASE_URL=https://back-j9al.onrender.com
   container2:
     image: backend-image
     ports:
