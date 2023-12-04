@@ -9,7 +9,7 @@ services:
     depends_on:
       - container2
     environment:
-      - REACT_APP_BASE_URL=https://container2:5002
+      - REACT_APP_BASE_URL=https://lib-container2-1:5002
 
   container2:
     image: backend-image
