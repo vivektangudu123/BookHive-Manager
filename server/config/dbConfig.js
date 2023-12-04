@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false)
 console.log(process.env.jwt_secret)
-const mongoContainerName = 'mongo-container';
-//mongoose.connect("mongodb+srv://vivektangudu:viv@cluster0.czt49fi.mongodb.net/check")
-const mongoUrl = `mongodb://${mongoContainerName}:27017/check`;
-mongoose.connect(mongoUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+
+mongoose.connect('mongodb://localhost:27017/your_database', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connection = mongoose.connection;
 

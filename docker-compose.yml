@@ -9,7 +9,7 @@ services:
     depends_on:
       - container2
     environment:
-      - REACT_APP_BASE_URL=https://back-j9al.onrender.com
+      - REACT_APP_BASE_URL=https://localhost:5003
   container2:
     image: backend-image
     ports:
