@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false)
 console.log(process.env.jwt_secret)
 
-mongoose.connect('mongodb://localhost:27017/your_database', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://your_username:your_password@localhost:27017/?authMechanism=DEFAULT', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
 
 const connection = mongoose.connection;
 
