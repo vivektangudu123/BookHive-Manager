@@ -31,6 +31,10 @@ app.use("/api/users", usersRoute);
 app.use("/api/books", booksRoute);
 app.use("/api/issues", issuesRoute);
 app.use("/api/reports", reportsRoute);
+app.get('/', (req, res) => {
+  logger.info('Transaction Home OK');
+  res.send("hello it/s running")
+})
 
 const path = require("path");
 __dirname = path.resolve();

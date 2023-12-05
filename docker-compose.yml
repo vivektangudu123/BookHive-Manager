@@ -1,17 +1,22 @@
 version: '3'
 services:
-  container1:
+  container_front:
     image: frontend-image
     ports:
       - "3000:3000"
     networks:
       - mynetwork
     depends_on:
-      - container2
+      - container_back
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://container_back:5002" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
     environment:
-      - REACT_APP_BASE_URL=https://lib-container2-1:5002
+      - REACT_APP_BASE_URL=http://container_back:5002
 
-  container2:
+  container_back:
     image: backend-image
     ports:
       - "5002:5002"
