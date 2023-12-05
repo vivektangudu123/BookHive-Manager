@@ -27,6 +27,7 @@ services:
     environment:
       - MONGO_URL=mongodb://localhost:27017/mydatabase
       - jwt_secret=secret
+      - PORT=5002
 
   mongodb_db:
     networks:

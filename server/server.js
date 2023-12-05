@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 require("dotenv").config();
 const dbConfig = require("./config/dbConfig");
-const port = process.env.PORT || 5003;
+const port = process.env.PORT || 5002;
 
 const usersRoute = require("./routes/usersRoute");
 const booksRoute = require("./routes/booksRoute");
@@ -32,7 +32,7 @@ app.use("/api/books", booksRoute);
 app.use("/api/issues", issuesRoute);
 app.use("/api/reports", reportsRoute);
 app.get('/', (req, res) => {
-  logger.info('Transaction Home OK');
+  console.log('Transaction Home OK');
   res.send("hello it/s running")
 })
 
