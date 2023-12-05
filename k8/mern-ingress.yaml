@@ -23,11 +23,11 @@ spec:
           service:
             name: backend-service
             port:
-              number: 5005
+              number: 5000
       - path: /frontend
         pathType: Prefix
         backend:
           service:
             name: frontend-service
             port:
-              number: 3003
+              number: 3000

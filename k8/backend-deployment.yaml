@@ -58,7 +58,7 @@ spec:
       - name: backend
         image: bean6792/backend-image:latest
         ports:
-        - containerPort: 5005
+        - containerPort: 5000
         env: 
         - name: MONGO_URL
           value: "mongodb://mongodb-service.mern-app.svc.cluster.local:27017/your_databa"
