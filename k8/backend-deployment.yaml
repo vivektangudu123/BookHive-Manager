@@ -62,8 +62,11 @@ spec:
         env: 
         - name: MONGO_URL
           value: "mongodb://mongodb-service.mern-app.svc.cluster.local:27017/your_databa"
-        - name: JWT
-          valueFrom:
-            secretKeyRef:
-              name: mern-backend-secret
-              key: jwt_secret
+        - name: PORT
+          value: "5000"
+        - name: jwt_secret
+          value: "secret"
+          # valueFrom:
+          #   secretKeyRef:
+          #     name: mern-backend-secret
+          #     key: jwt_secret
