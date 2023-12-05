@@ -10,17 +10,17 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: "/"
+          - path: "/client"
             pathType: Prefix
             backend:
               service:
                 name: frontend-service
                 port:
                   number: 3000
-          - path: "/api"
+          - path: "/server"
             pathType: Prefix
             backend:
               service:
                 name: backend-service
                 port:
-                  number: 5000
+                  number: 5001
