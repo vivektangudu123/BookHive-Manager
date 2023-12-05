@@ -52,3 +52,13 @@
       kubernetes.core.k8s:
         state: present
         definition: "{{ lookup('file', 'k8/mern-ingress.yaml') | from_yaml }}"
+
+    - name: Create MongoDB Deployment
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', 'k8/mongo-deployment.yaml') | from_yaml }}"
+
+    - name: Create MongoDB Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', 'k8/mongo-service.yaml') | from_yaml }}"

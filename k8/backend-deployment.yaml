@@ -1,13 +1,54 @@
-apiVersion: apps/v1
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: backend-deployment
+#   namespace: mern-app
+# spec:
+#   selector:
+#     matchLabels:
+#       app: backend
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: backend
+#     spec:
+#       containers:
+#       - name: backend
+#         image: bean6792/backend-image:latest
+#       - name: mongodb
+#         image: mongo:latest 
+#         resources:
+#           limits:
+#             memory: "128Mi"
+#             cpu: "500m"
+#         ports:
+#         - name: http
+#           containerPort: 5000
+#         env: 
+#         - name: MONGO
+#           valueFrom:
+#             # secretKeyRef:
+#             #   name: mern-backend-secret
+#             #   key: MONGO_URL
+#         - name: MONGO_URL
+#           value: "mongodb://mongodb:27017/yourdatabase"
+#         - name: JWT
+#           valueFrom:
+#             secretKeyRef:
+#               name: mern-backend-secret
+#               key: jwt_secret
+
+apiVersion: v1
 kind: Deployment
 metadata:
   name: backend-deployment
   namespace: mern-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: backend
-  replicas: 1
   template:
     metadata:
       labels:
@@ -16,22 +57,13 @@ spec:
       containers:
       - name: backend
         image: bean6792/backend-image:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
-        - name: http
-          containerPort: 5000
+        - containerPort: 5005
         env: 
-        - name: MONGO
-          valueFrom:
-            secretKeyRef:
-              name: mern-backend-secret
-              key: MONGO_URL
+        - name: MONGO_URL
+          value: "mongodb://mongodb-service.mern-app.svc.cluster.local:27017/your_databa"
         - name: JWT
           valueFrom:
             secretKeyRef:
               name: mern-backend-secret
               key: jwt_secret
-

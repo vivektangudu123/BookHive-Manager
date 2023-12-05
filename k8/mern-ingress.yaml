@@ -3,24 +3,31 @@ kind: Ingress
 metadata:
   name: mern-ingress
   namespace: mern-app
-  labels:
-    name: fintrack-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: localhost
-      http:
-        paths:
-          - path: "/client"
-            pathType: Prefix
-            backend:
-              service:
-                name: frontend-service
-                port:
-                  number: 3000
-          - path: "/server"
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-service
-                port:
-                  number: 5001
+  - host: localhost
+    http:
+      paths:
+      - path: /mongodb
+        pathType: Prefix
+        backend:
+          service:
+            name: mongodb-service
+            port:
+              number: 27017
+      - path: /backend
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 5005
+      - path: /frontend
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 3003

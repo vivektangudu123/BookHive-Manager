@@ -17,5 +17,5 @@ connection.on('connected', () => {
 connection.on('error', (err) => {
     console.log('Mongo DB Connection Failed');
 })
-
+console.log(MONGO_URL);
 module.exports = connection;
