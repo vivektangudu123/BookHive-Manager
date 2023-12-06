@@ -19,7 +19,7 @@ function BookDescription() {
       dispatch(HideLoading());
       if (response.success) {
         setBookData(response.data);
-        logger.info("Got book details Success, Book" + bookData.title)
+        logger.info("Got book details Success, Book " + id)
       } else {
         logger.error("Get book details by details failed " + response.message)
         message.error(response.message);

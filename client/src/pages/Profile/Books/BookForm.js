@@ -32,11 +32,11 @@ function BookForm({
       if (formType === "add") {
         values.availableCopies = values.totalCopies;
         response = await AddBook(values);
-        logger.info("Adding Book: " + values.title + " " + response.success)
+        logger.info("Adding Book: " + response.success)
       } else {
         values._id = selectedBook._id;
         response = await UpdateBook(values);
-        logger.info("Updating Book: " + values.title + " " + response.success)
+        logger.info("Updating Book: " + response.success)
       }
       if (response.success) {
         message.success(response.message);

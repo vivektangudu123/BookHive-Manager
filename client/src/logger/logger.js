@@ -11,6 +11,6 @@ const logger = pino({
         paths: ['password', 'accessToken', 'refreshToken'],
         censor: '***REDACTED***',
     },
-});
+},);  // Specify the path to your log file
 
 export default logger;
