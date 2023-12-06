@@ -26,6 +26,7 @@ router.put("/update-book/:id", authMiddleware, async (req, res) => {
 // delete a book
 router.delete("/delete-book/:id", authMiddleware, async (req, res) => {
   try {
+    console.log(req.params.id);
     await Book.findByIdAndDelete(req.params.id);
     return res.send({ success: true, message: "Book deleted successfully" });
   } catch (error) {

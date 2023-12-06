@@ -16,7 +16,7 @@ import BookDescription from "./pages/BookDescription";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
-
+  console.log(process.env.REACT_APP_BASE_URL);
   return (
     <div>
       {loading && <Loader />}
