@@ -5,6 +5,7 @@ import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import Button from "../../../components/Button";
+import logger from "../../../logger/logger";
 
 function IssuedBooks({ showIssuedBooks, setShowIssuedBooks, selectedUser }) {
   const [issuedBooks, setIssuedBooks] = React.useState([]);
@@ -17,10 +18,12 @@ function IssuedBooks({ showIssuedBooks, setShowIssuedBooks, selectedUser }) {
       });
       dispatch(HideLoading());
       if (response.success) {
+        logger.info("Books issue,Success");
         setIssuedBooks(response.data);
       }
     } catch (error) {
       dispatch(HideLoading());
+      logger.info("Books issue,failed " + error.message);
       message.error(error.message);
     }
   };
@@ -72,7 +75,7 @@ function IssuedBooks({ showIssuedBooks, setShowIssuedBooks, selectedUser }) {
   return (
     <Modal
       open={showIssuedBooks}
-   
+
       onCancel={() => setShowIssuedBooks(false)}
       footer={null}
       width={1400}
@@ -81,7 +84,7 @@ function IssuedBooks({ showIssuedBooks, setShowIssuedBooks, selectedUser }) {
         {selectedUser.name}'s Issued Books
       </h1>
 
-        <Table columns={columns} dataSource={issuedBooks} />
+      <Table columns={columns} dataSource={issuedBooks} />
     </Modal>
   );
 }

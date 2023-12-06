@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
+import React from "react";
 import "./stylesheets/alignments.css";
 import "./stylesheets/theme.css";
 import "./stylesheets/sizes.css";
@@ -16,7 +16,6 @@ import BookDescription from "./pages/BookDescription";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
-  console.log(process.env.REACT_APP_BASE_URL);
   return (
     <div>
       {loading && <Loader />}

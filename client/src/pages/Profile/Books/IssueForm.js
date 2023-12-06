@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
 import { EditIssue, IssueBook, get_id_by_email } from "../../../apicalls/issues";
+import logger from "../../../logger/logger";
 
 function IssueForm({
   open = false,
@@ -63,7 +64,7 @@ function IssueForm({
       dispatch(ShowLoading());
       let response = null;
       if (type !== "edit") {
-        console.log(patronId)
+
         response = await IssueBook({
           book: selectedBook._id,
           user: patronId,
@@ -92,6 +93,7 @@ function IssueForm({
       dispatch(HideLoading());
       if (response.success) {
         message.success(response.message);
+        logger.info("Issue success " + selectedBook._id)
         getData();
         setPatronId("");
         setReturnDate("");
@@ -100,9 +102,11 @@ function IssueForm({
         setSelectedBook(null);
         setOpen(false);
       } else {
+        logger.error("issue edit/add failed " + response.messages)
         message.error(response.message);
       }
     } catch (error) {
+      logger.error("issue edit/add failed " + error.messages)
       dispatch(HideLoading());
       message.error(error.message);
     }

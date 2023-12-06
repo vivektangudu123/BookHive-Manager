@@ -8,6 +8,7 @@ import BookForm from "./BookForm";
 import moment from "moment";
 import Issues from "./Issues";
 import IssueForm from "./IssueForm";
+import logger from "../../../logger/logger";
 
 function Books() {
   const [formType, setFormType] = useState("add");
@@ -25,8 +26,10 @@ function Books() {
       dispatch(HideLoading());
       if (response.success) {
         setBooks(response.data);
+        logger.info("Got all book details,Success")
       } else {
         message.error(response.message);
+        logger.error("Get all book details by details failed " + response.message)
       }
     } catch (error) {
       dispatch(HideLoading());
@@ -44,10 +47,14 @@ function Books() {
       const response = await DeleteBook(id);
       dispatch(HideLoading());
       if (response.success) {
+        logger.info("Book deleted, Id:" + id);
         message.success(response.message);
+
         getBooks();
       } else {
+        logger.error("Book deleting failure: " + id)
         message.error(response.message);
+
       }
     } catch (error) {
       dispatch(HideLoading());

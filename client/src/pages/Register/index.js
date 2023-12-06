@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RegisterUser } from "../../apicalls/users";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
+import logger from "../../logger/logger"
 
 function Register() {
   const navigate = useNavigate();
@@ -16,10 +17,13 @@ function Register() {
       values.email = lowercaseEmail
       const response = await RegisterUser(values);
       dispatch(HideLoading());
+
       if (response.success) {
         message.success(response.message);
+        logger.info(lowercaseEmail + " User added succesfully")
         navigate("/login");
       } else {
+        logger.error(" User adding Failed, error: ", message.error)
         message.error(response.message);
       }
     } catch (error) {

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { GetBookById } from "../../apicalls/books";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
+import logger from "../../logger/logger";
 
 function BookDescription() {
   const [bookData, setBookData] = React.useState(null);
@@ -18,7 +19,9 @@ function BookDescription() {
       dispatch(HideLoading());
       if (response.success) {
         setBookData(response.data);
+        logger.info("Got book details Success, Book" + bookData.title)
       } else {
+        logger.error("Get book details by details failed " + response.message)
         message.error(response.message);
       }
     } catch (error) {

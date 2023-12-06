@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LoginUser } from "../../apicalls/users";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
+import logger from "../../logger/logger";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,8 +21,11 @@ function Login() {
         message.success(response.message);
         localStorage.setItem("token", response.data);
         window.location.href = "/";
+        logger.info("User logged in Success: " + values.lowercaseEmail);
       } else {
+        logger.error("User loggin failed: " + values.lowercaseEmail + " " + response.message)
         message.error(response.message);
+
       }
     } catch (error) {
       dispatch(HideLoading());

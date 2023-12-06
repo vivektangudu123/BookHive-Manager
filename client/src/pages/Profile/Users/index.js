@@ -6,6 +6,8 @@ import moment from "moment";
 import { GetAllUsers } from "../../../apicalls/users";
 import Button from "../../../components/Button";
 import IssuedBooks from "./IssuedBooks";
+import logger from "../../../logger/logger";
+
 
 function Users({ role }) {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -18,8 +20,10 @@ function Users({ role }) {
       const response = await GetAllUsers(role);
       dispatch(HideLoading());
       if (response.success) {
+        logger.info("get all users,Success");
         setUsers(response.data);
       } else {
+        logger.info("get all users,Failed " + message.error);
         message.error(response.message);
       }
     } catch (error) {

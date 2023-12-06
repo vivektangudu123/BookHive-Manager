@@ -6,12 +6,14 @@ import { DeleteIssue, GetIssues, ReturnBook } from "../../../apicalls/issues";
 import moment from "moment";
 import Button from "../../../components/Button";
 import IssueForm from "./IssueForm";
+import logger from "../../../logger/logger"
 
 function Issues({ open = false, setOpen, selectedBook, reloadBooks }) {
   const [issues, setIssues] = React.useState([]);
   const [selectedIssue, setSelectedIssue] = React.useState(null);
   const [showIssueForm, setShowIssueForm] = React.useState(false);
   const dispatch = useDispatch();
+
   const getIssues = async () => {
     try {
       dispatch(ShowLoading());
@@ -20,10 +22,12 @@ function Issues({ open = false, setOpen, selectedBook, reloadBooks }) {
       });
       dispatch(HideLoading());
       if (response.success) {
+        logger.info("All issues pulled")
         setIssues(response.data);
       }
     } catch (error) {
       dispatch(HideLoading());
+      logger.error("All issues pull: failed " + error.message)
       message.error(error.message);
     }
   };
@@ -178,8 +182,8 @@ function Issues({ open = false, setOpen, selectedBook, reloadBooks }) {
           selectedIssue={selectedIssue}
           open={showIssueForm}
           setOpen={setShowIssueForm}
-          setSelectedBook={() => {}}
-          getData={()=>{
+          setSelectedBook={() => { }}
+          getData={() => {
             getIssues();
             reloadBooks();
           }}

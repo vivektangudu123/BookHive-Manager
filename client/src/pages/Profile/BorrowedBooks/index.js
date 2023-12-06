@@ -5,9 +5,10 @@ import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Button from "../../../components/Button";
+import logger from "../../../logger/logger"
 
 function IssuedBooks() {
-  const {user} = useSelector((state) => state.users);
+  const { user } = useSelector((state) => state.users);
   const [issuedBooks, setIssuedBooks] = React.useState([]);
   const dispatch = useDispatch();
   const getIssues = async () => {
@@ -18,10 +19,12 @@ function IssuedBooks() {
       });
       dispatch(HideLoading());
       if (response.success) {
+        logger.info("get all issued books,Success")
         setIssuedBooks(response.data);
       }
     } catch (error) {
       dispatch(HideLoading());
+      logger.info("get all issued books,Failed " + error.message)
       message.error(error.message);
     }
   };
@@ -52,7 +55,7 @@ function IssuedBooks() {
     },
     {
       title: "Rent",
-      dataIndex: "rent", 
+      dataIndex: "rent",
     },
     {
       title: "Fine",

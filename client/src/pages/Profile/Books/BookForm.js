@@ -4,7 +4,7 @@ import Button from "../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { AddBook, UpdateBook } from "../../../apicalls/books";
 import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
-
+import logger from "../../../logger/logger";
 function BookForm({
   open,
   setOpen,
@@ -32,9 +32,11 @@ function BookForm({
       if (formType === "add") {
         values.availableCopies = values.totalCopies;
         response = await AddBook(values);
+        logger.info("Adding Book: " + values.title + " " + response.success)
       } else {
         values._id = selectedBook._id;
         response = await UpdateBook(values);
+        logger.info("Updating Book: " + values.title + " " + response.success)
       }
       if (response.success) {
         message.success(response.message);

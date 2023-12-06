@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { GetReports } from "../../../apicalls/reports";
 import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
-
+import logger from "../../../logger/logger"
 function Reports() {
   const [reports, setReports] = React.useState(null);
 
@@ -14,12 +14,14 @@ function Reports() {
       const response = await GetReports();
       dispatch(HideLoading());
       if (response.success) {
+        logger.info("Get all reports,Success");
         setReports(response.data);
       } else {
         message.error(response.message);
       }
     } catch (error) {
       dispatch(HideLoading());
+      logger.info("Get all reports,Failed " + error.message);
       message.error(error.message);
     }
   };

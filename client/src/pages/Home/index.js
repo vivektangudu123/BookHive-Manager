@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { DeleteBook, GetAllBooks } from "../../apicalls/books";
 import Button from "../../components/Button";
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
-
+import logger from "../../logger/logger";
 function Home() {
   const [books, setBooks] = React.useState([]);
   const dispatch = useDispatch();
@@ -17,7 +17,9 @@ function Home() {
       dispatch(HideLoading());
       if (response.success) {
         setBooks(response.data);
+        logger.info("Got all book details,Success")
       } else {
+        logger.error("Get all book details by details failed " + response.message)
         message.error(response.message);
       }
     } catch (error) {
