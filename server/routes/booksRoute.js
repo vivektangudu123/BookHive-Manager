@@ -25,8 +25,8 @@ router.put("/update-book/:id", authMiddleware, async (req, res) => {
 
 // delete a book
 router.delete("/delete-book/:id", authMiddleware, async (req, res) => {
+  console.log(req.params.id)
   try {
-    console.log(req.params.id);
     await Book.findByIdAndDelete(req.params.id);
     return res.send({ success: true, message: "Book deleted successfully" });
   } catch (error) {
@@ -46,6 +46,7 @@ router.get("/get-all-books", authMiddleware, async (req, res) => {
 // get a book by id
 router.get("/get-book-by-id/:id", authMiddleware, async (req, res) => {
   try {
+    console.log(req.params.id)
     const book = await Book.findById(req.params.id);
     return res.send({ success: true, data: book });
   } catch (error) {

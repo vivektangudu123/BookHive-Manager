@@ -24,7 +24,7 @@ export const GetAllBooks = async () => {
 // update book
 export const UpdateBook = async (payload) => {
   try {
-    const response = await axiosInstance.put(
+    const response = await axiosInstance.put(baseUrl +
       `/api/books/update-book/${payload._id}`,
       payload
     );
@@ -36,6 +36,7 @@ export const UpdateBook = async (payload) => {
 
 // delete book
 export const DeleteBook = async (id) => {
+  console.log(id)
   try {
     const response = await axiosInstance.delete(baseUrl + `/api/books/delete-book/${id}`);
     return response.data;

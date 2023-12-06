@@ -14,10 +14,10 @@ const usersRoute = require("./routes/usersRoute");
 const booksRoute = require("./routes/booksRoute");
 const issuesRoute = require("./routes/issuesRoute");
 const reportsRoute = require("./routes/reportsRoute");
-
+// const books_update_Route = require("./routes/books_update");
 app.use(cors({
   origin: '*',
-  methods: ['POST', 'GET', 'OPTIONS'],
+  methods: '*',
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use((req, res, next) => {
@@ -31,6 +31,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/books", booksRoute);
 app.use("/api/issues", issuesRoute);
 app.use("/api/reports", reportsRoute);
+// app.use("/api/books-update", books_update_Route);
 app.get('/', (req, res) => {
   console.log('Transaction Home OK');
   res.send("hello it/s running")
