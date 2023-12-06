@@ -1,5 +1,5 @@
 import { Col, Form, message, Modal, Row } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { AddBook, UpdateBook } from "../../../apicalls/books";
@@ -15,12 +15,19 @@ function BookForm({
   setSelectedBook,
 }) {
   const { user } = useSelector((state) => state.users);
+  const [imageFile, setImageFile] = useState(null);
   const dispatch = useDispatch();
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
 
       values.createdBy = user._id;
+      if (imageFile) {
+        // Convert image file to base64 string
+        const base64Image = await getBase64(imageFile);
+        values.image = base64Image;
+      }
+
       let response = null;
       if (formType === "add") {
         values.availableCopies = values.totalCopies;
@@ -41,6 +48,18 @@ function BookForm({
       dispatch(HideLoading());
       message.error(error.message);
     }
+  };
+  const getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
   };
 
   return (
@@ -85,15 +104,7 @@ function BookForm({
             </Form.Item>
           </Col>
 
-          <Col span={24}>
-            <Form.Item
-              label="Image URL"
-              name="image"
-              rules={[{ required: true, message: "Please input image url" }]}
-            >
-              <input type="text" />
-            </Form.Item>
-          </Col>
+
 
           <Col span={8}>
             <Form.Item
@@ -164,6 +175,15 @@ function BookForm({
               rules={[{ required: true, message: "Please input total copies" }]}
             >
               <input type="text" />
+            </Form.Item>
+          </Col>
+          <Col span={24}>
+            <Form.Item
+              label="Image"
+              name="image"
+              rules={[{ required: true, message: "Please input image url" }]}
+            >
+              <input type="file" accept="image/*" onChange={handleImageChange} />
             </Form.Item>
           </Col>
         </Row>

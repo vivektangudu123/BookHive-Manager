@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Issue = require("../models/issuesModel");
 const Book = require("../models/booksModel");
+const UserModel = require("../models/usersModel");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 // issue a book to patron
@@ -108,4 +109,19 @@ router.post("/edit-issue", authMiddleware, async (req, res) => {
   }
 });
 
+router.post("/get-user-id-by-email", authMiddleware, async (req, res) => {
+  try {
+    const email = req.body.email;
+
+    const user = await UserModel.findOne({ email });
+
+    if (user) {
+      res.send({ success: true, userId: user._id, role: user.role });
+    } else {
+      res.send({ success: false, message: "User not found" });
+    }
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+});
 module.exports = router;

@@ -1,10 +1,14 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require('body-parser')
 const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200
 }
 const app = express();
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json());
 app.use(express.json());
 require("dotenv").config();
 const dbConfig = require("./config/dbConfig");
@@ -22,8 +26,8 @@ app.use(cors({
 }));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', '*');
+  res.header('Access-Control-Allow-Headers', '*');
   next();
 });
 

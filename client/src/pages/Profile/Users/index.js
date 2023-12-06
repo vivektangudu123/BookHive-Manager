@@ -44,6 +44,7 @@ function Users({ role }) {
     {
       title: "Email",
       dataIndex: "email",
+      render: (email) => email.toLowerCase(),
     },
     {
       title: "Phone",

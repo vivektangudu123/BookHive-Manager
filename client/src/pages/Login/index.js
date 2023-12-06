@@ -12,6 +12,8 @@ function Login() {
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
+      const lowercaseEmail = values.email.toLowerCase();
+      values.email = lowercaseEmail
       const response = await LoginUser(values);
       dispatch(HideLoading());
       if (response.success) {
@@ -50,7 +52,8 @@ function Login() {
                 required: true,
                 message: "Please input your email!",
               },
-            ]}
+            ]
+            }
           >
             <input type="email" placeholder="Email" />
           </Form.Item>

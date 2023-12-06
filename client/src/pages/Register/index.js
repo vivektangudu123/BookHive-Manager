@@ -12,6 +12,8 @@ function Register() {
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
+      const lowercaseEmail = values.email.toLowerCase();
+      values.email = lowercaseEmail
       const response = await RegisterUser(values);
       dispatch(HideLoading());
       if (response.success) {

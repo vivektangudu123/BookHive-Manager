@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUserById } from "../../../apicalls/users";
+
 import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
-import { EditIssue, IssueBook } from "../../../apicalls/issues";
+import { EditIssue, IssueBook, get_id_by_email } from "../../../apicalls/issues";
 
 function IssueForm({
   open = false,
@@ -23,6 +23,7 @@ function IssueForm({
   const [patronId, setPatronId] = React.useState(
     type === "edit" ? selectedIssue.user._id : ""
   );
+  const [patronEmail, setPatronEmail] = useState("");
   const [returnDate, setReturnDate] = React.useState(
     type === "edit" ? moment(selectedIssue.returnDate).format("YYYY-MM-DD") : ""
   );
@@ -31,22 +32,24 @@ function IssueForm({
   const validate = async () => {
     try {
       dispatch(ShowLoading());
-      const response = await GetUserById(patronId);
+
+
+      const response = await get_id_by_email({ email: patronEmail });
       if (response.success) {
-        if (response.data.role !== "patron") {
-          setValidated(false);
-          setErrorMessage("This user is not a patron");
-          dispatch(HideLoading());
-          return;
-        } else {
-          setPatronData(response.data);
+        if (response.userId && response.role === "patron") {
+          setPatronData(response);
+          setPatronId(response.userId)
           setValidated(true);
           setErrorMessage("");
+        } else {
+          setValidated(false);
+          setErrorMessage("This user is not a patron");
         }
       } else {
         setValidated(false);
         setErrorMessage(response.message);
       }
+
       dispatch(HideLoading());
     } catch (error) {
       dispatch(HideLoading());
@@ -60,9 +63,10 @@ function IssueForm({
       dispatch(ShowLoading());
       let response = null;
       if (type !== "edit") {
+        console.log(patronId)
         response = await IssueBook({
           book: selectedBook._id,
-          user: patronData._id,
+          user: patronId,
           issueDate: new Date(),
           returnDate,
           rent:
@@ -104,13 +108,13 @@ function IssueForm({
     }
   };
 
+
   useEffect(() => {
     if (type === "edit") {
       validate();
     }
   }, [open]);
 
-  console.log(type)
 
   return (
     <Modal
@@ -125,12 +129,12 @@ function IssueForm({
           {type === "edit" ? "Edit / Renew Issue" : "Issue Book"}
         </h1>
         <div>
-          <span>Patron Id </span>
+          <span>Patron Email </span>
           <input
-            type="text"
-            value={patronId}
-            onChange={(e) => setPatronId(e.target.value)}
-            placeholder="Patron Id"
+            type="email"
+            value={patronEmail}
+            onChange={(e) => setPatronEmail(e.target.value)}
+            placeholder="Patron Email"
             disabled={type === "edit"}
           />
         </div>
@@ -171,7 +175,7 @@ function IssueForm({
           {type === "add" && (
             <Button
               title="Validate"
-              disabled={patronId === "" || returnDate === ""}
+              disabled={patronEmail === "" || returnDate === ""}
               onClick={validate}
             />
           )}
@@ -179,7 +183,7 @@ function IssueForm({
             <Button
               title={type === "edit" ? "Edit" : "Issue"}
               onClick={onIssue}
-              disabled={patronId === "" || returnDate === ""}
+              disabled={patronEmail === "" || returnDate === ""}
             />
           )}
         </div>
