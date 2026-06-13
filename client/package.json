@@ -43,5 +43,16 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://back-j9al.onrender.com"
+  "proxy": "https://back-j9al.onrender.com",
+  "overrides": {
+    "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@^1.5.0",
+    "rollup-plugin-terser": "npm:@rollup/plugin-terser@^0.4.4",
+    "svgo": "^3.3.2",
+    "@babel/plugin-proposal-class-properties": "npm:@babel/plugin-transform-class-properties@^7",
+    "@babel/plugin-proposal-private-methods": "npm:@babel/plugin-transform-private-methods@^7",
+    "@babel/plugin-proposal-numeric-separator": "npm:@babel/plugin-transform-numeric-separator@^7",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "npm:@babel/plugin-transform-nullish-coalescing-operator@^7",
+    "@babel/plugin-proposal-optional-chaining": "npm:@babel/plugin-transform-optional-chaining@^7",
+    "@babel/plugin-proposal-private-property-in-object": "npm:@babel/plugin-transform-private-property-in-object@^7"
+  }
 }
